@@ -64,7 +64,7 @@ public class NBody
             for(int j = 0; j < planets.length; j++)
             {
                 Planet p = planets[j];
-                p.Draw();
+                p.draw();
             }
 
             StdDraw.show();
