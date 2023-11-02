@@ -8,7 +8,7 @@ public class ArrayDeque<T> {
 
     private void grow() {
         capacity *= 2;
-        T[] a = (T[])new Object[capacity];
+        T[] a = (T[]) new Object[capacity];
         int ptr1 = addOne(nextfirst);
         int ptr2 = minusOne(nextlast);
         int i = 0;
@@ -17,7 +17,7 @@ public class ArrayDeque<T> {
             ptr1 = addOne(ptr1);
             i += 1;
         }
-        a[size-1] = items[ptr2];
+        a[size - 1] = items[ptr2];
         items = a;
         nextfirst = items.length - 1;
         nextlast = size;
@@ -25,7 +25,7 @@ public class ArrayDeque<T> {
 
     private void shrink() {
         capacity /= 2;
-        T[] a = (T[])new Object[capacity];
+        T[] a = (T[]) new Object[capacity];
         int ptr1 = addOne(nextfirst);
         int ptr2 = minusOne(nextlast);
         int i = 0;
@@ -34,7 +34,7 @@ public class ArrayDeque<T> {
             ptr1 = addOne(ptr1);
             i += 1;
         }
-        a[size-1] = items[ptr2];
+        a[size - 1] = items[ptr2];
         items = a;
         nextfirst = items.length - 1;
         nextlast = size + 1;
@@ -95,10 +95,12 @@ public class ArrayDeque<T> {
         }
     }
     public T removeFirst() {
-        if (size < items.length*0.25 && size > 16) {
+        if (size < items.length * 0.25 && size > 16) {
             shrink();
         }
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         nextfirst = addOne(nextfirst);
         T retVal = items[nextfirst];
         items[nextfirst] = null;
@@ -106,10 +108,12 @@ public class ArrayDeque<T> {
         return retVal;
     }
     public T removeLast() {
-        if (size < items.length*0.25 && size > 16) {
+        if (size < items.length * 0.25 && size > 16) {
             shrink();
         }
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         nextlast = minusOne(nextlast);
         T retVal = items[nextlast];
         items[nextlast] = null;

@@ -1,5 +1,4 @@
-public class LinkedListDeque<T>
-{
+public class LinkedListDeque<T> {
     private class DataNode {
         DataNode prev;
         T item;
@@ -19,12 +18,12 @@ public class LinkedListDeque<T>
     private int size;
     /** The first item (if it exists) is at sentinel. next **/
     private final DataNode sentinel;
-    public LinkedListDeque(T x) {
-        sentinel = new DataNode(null, null);
-        sentinel.next = new DataNode(sentinel, x, sentinel);
-        sentinel.prev = sentinel.next;
-        size = 1;
-    }
+//    private LinkedListDeque(T x) {
+//        sentinel = new DataNode(null, null);
+//        sentinel.next = new DataNode(sentinel, x, sentinel);
+//        sentinel.prev = sentinel.next;
+//        size = 1;
+//    }
     public LinkedListDeque() {
         sentinel = new DataNode(null, null);
         sentinel.prev = sentinel;
@@ -61,8 +60,7 @@ public class LinkedListDeque<T>
     public T removeFirst() {
         if (sentinel.next == sentinel) {
             return null;
-        }
-        else {
+        } else {
             T retVal = sentinel.next.item;
             sentinel.next = sentinel.next.next;
             sentinel.next.prev = sentinel;
@@ -74,8 +72,7 @@ public class LinkedListDeque<T>
     public T removeLast() {
         if (sentinel.prev == sentinel) {
             return null;
-        }
-        else {
+        } else {
             T retVal = sentinel.prev.item;
             sentinel.prev = sentinel.prev.prev;
             sentinel.prev.next = sentinel;
@@ -87,11 +84,9 @@ public class LinkedListDeque<T>
     public T get(int index) {
         if (index >= size) {
             return null;
-        }
-        else {
+        } else {
             DataNode ptr = sentinel;
-            for (int i = 0; i <= index; i++)
-            {
+            for (int i = 0; i <= index; i++) {
                 ptr = ptr.next;
             }
             return ptr.item;
@@ -101,8 +96,7 @@ public class LinkedListDeque<T>
     private T getRecursiveHelper(int index, DataNode node) {
         if (index == 0) {
             return node.item;
-        }
-        else {
+        } else {
             return getRecursiveHelper(index - 1, node.next);
         }
     }
