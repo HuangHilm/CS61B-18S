@@ -4,7 +4,7 @@ public class ArrayDeque<T> {
     private int size;
     private int nextfirst;
     private int nextlast;
-    T[] items;
+    private T[] items;
 
     private void grow() {
         capacity *= 2;
@@ -18,6 +18,8 @@ public class ArrayDeque<T> {
             i += 1;
         }
         items = a;
+        nextfirst = items.length - 1;
+        nextlast = size + 1;
     }
 
     private void shrink() {
@@ -32,6 +34,8 @@ public class ArrayDeque<T> {
             i += 1;
         }
         items = a;
+        nextfirst = items.length - 1;
+        nextlast = size + 1;
     }
 
     private int minusOne(int index) {
