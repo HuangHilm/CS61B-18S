@@ -4,24 +4,13 @@ public class ArrayDeque<T> {
     private int size;
     private int nextfirst;
     private int nextlast;
-    private boolean movef = true;
-    private boolean movel = true;
     private T[] items;
 
     private void grow() {
         capacity *= 2;
         T[] a = (T[]) new Object[capacity];
-        int ptr1, ptr2;
-        if(movef) {
-            ptr1 = addOne(nextfirst);
-        }else{
-            ptr1 = nextfirst;
-        }
-        if(movel) {
-            ptr2 = minusOne(nextlast);
-        }else{
-            ptr2 = nextlast;
-        }
+        int ptr1 = addOne(nextfirst);
+        int ptr2 = minusOne(nextlast);
         int i = 0;
         while (ptr1 != ptr2) {
             a[i] = items[ptr1];
@@ -37,17 +26,8 @@ public class ArrayDeque<T> {
     private void shrink() {
         capacity /= 2;
         T[] a = (T[]) new Object[capacity];
-        int ptr1, ptr2;
-        if(movef) {
-            ptr1 = addOne(nextfirst);
-        }else{
-            ptr1 = nextfirst;
-        }
-        if(movel) {
-            ptr2 = minusOne(nextlast);
-        }else{
-            ptr2 = nextlast;
-        }
+        int ptr1 = addOne(nextfirst);
+        int ptr2 = minusOne(nextlast);
         int i = 0;
         while (ptr1 != ptr2) {
             a[i] = items[ptr1];
@@ -89,9 +69,6 @@ public class ArrayDeque<T> {
         }
         items[nextfirst] = item;
         nextfirst = minusOne(nextfirst);
-        if (nextfirst == nextlast) {
-            movel = false;
-        }
         size += 1;
     }
     public void addLast(T item) {
@@ -100,9 +77,6 @@ public class ArrayDeque<T> {
         }
         items[nextlast] = item;
         nextlast = addOne(nextlast);
-        if (nextfirst == nextlast){
-            movef = false;
-        }
         size += 1;
     }
     public boolean isEmpty() {
@@ -121,7 +95,7 @@ public class ArrayDeque<T> {
         }
     }
     public T removeFirst() {
-        if (size < items.length * 0.25 && size >= 16) {
+        if (size < items.length * 0.25 && size > 16) {
             shrink();
         }
         if (size == 0) {
@@ -134,7 +108,7 @@ public class ArrayDeque<T> {
         return retVal;
     }
     public T removeLast() {
-        if (size < items.length * 0.25 && size >= 16) {
+        if (size < items.length * 0.25 && size > 16) {
             shrink();
         }
         if (size == 0) {
