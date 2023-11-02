@@ -10,29 +10,31 @@ public class ArrayDeque<T> {
         capacity *= 2;
         T[] a = (T[])new Object[capacity];
         int ptr1 = addOne(nextfirst);
-        int ptr2 = nextlast;
+        int ptr2 = minusOne(nextlast);
         int i = 0;
         while (ptr1 != ptr2) {
             a[i] = items[ptr1];
             ptr1 = addOne(ptr1);
             i += 1;
         }
+        a[size-1] = items[ptr2];
         items = a;
         nextfirst = items.length - 1;
-        nextlast = size + 1;
+        nextlast = size;
     }
 
     private void shrink() {
         capacity /= 2;
         T[] a = (T[])new Object[capacity];
         int ptr1 = addOne(nextfirst);
-        int ptr2 = nextlast;
+        int ptr2 = minusOne(nextlast);
         int i = 0;
         while (ptr1 != ptr2) {
             a[i] = items[ptr1];
             ptr1 = addOne(ptr1);
             i += 1;
         }
+        a[size-1] = items[ptr2];
         items = a;
         nextfirst = items.length - 1;
         nextlast = size + 1;
