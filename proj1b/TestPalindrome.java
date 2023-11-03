@@ -28,10 +28,12 @@ public class TestPalindrome {
 
         CharacterComparator cc = new OffByOne();
         assertTrue(palindrome.isPalindrome("flake", cc));
-        assertTrue(palindrome.isPalindrome("noon", cc));
+        assertFalse(palindrome.isPalindrome("noon", cc));
         assertTrue(palindrome.isPalindrome("&%", cc));
         assertTrue(palindrome.isPalindrome("ab", cc));
         assertTrue(palindrome.isPalindrome("a", cc));
         assertTrue(palindrome.isPalindrome("", cc));
+
+        assertFalse(palindrome.isPalindrome("aba", cc));
     }
 }
