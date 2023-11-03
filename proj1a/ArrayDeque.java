@@ -95,7 +95,7 @@ public class ArrayDeque<T> {
         }
     }
     public T removeFirst() {
-        if (size < items.length * 0.25 && size > 16) {
+        if (size <= items.length * 0.25 && size >= 16) {
             shrink();
         }
         if (size == 0) {
@@ -108,7 +108,7 @@ public class ArrayDeque<T> {
         return retVal;
     }
     public T removeLast() {
-        if (size < items.length * 0.25 && size > 16) {
+        if (size <= items.length * 0.25 && size >= 16) {
             shrink();
         }
         if (size == 0) {
